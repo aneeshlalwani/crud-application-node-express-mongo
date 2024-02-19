@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
         "name": "aneesh",
     });
 })
+
 // GET API FOR GETTING ALL PRODUCTS DATA
 app.get('/api/products', async (req, res) =>{
     try {
@@ -22,6 +23,18 @@ app.get('/api/products', async (req, res) =>{
     } catch (error) {
         res.status(500).json({message: error.message});
     }
+})
+
+// GET API FOR GETTING PRODUCT BY ID
+app.get('/api/product/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+        res.status(200).json(product);
+
+    } catch (error) {
+        res.status(500).json({message: error});
+        }
 })
 // POST API
 app.post('/api/products', async (req, res) => {
